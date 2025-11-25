@@ -29,6 +29,7 @@ public class EjemplosArrayList {
 		inventario.addAll(cajaNueva);
 		System.out.println("Se ha añadido la caja nueva.");
 		System.out.println("Inventario actualizado: " + inventario);
+		
 		// 4. MÉTODO ADD CON ÍNDICE (Insertar)
 		// Inserta "Tablet" en la posición 1, desplazando a los demás a la derecha
 		inventario.add(1, "Tablet");

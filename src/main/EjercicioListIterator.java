@@ -7,7 +7,6 @@ import java.util.ListIterator;
 public class EjercicioListIterator {
 
 	public static void main(String[] args) {
-		// EJERCICIO ITERATOR
 		ArrayList<String> alumnos = new ArrayList<>();
 		alumnos.add("Ana");
 		alumnos.add("Luis");
@@ -16,13 +15,6 @@ public class EjercicioListIterator {
 		alumnos.add("Pedro");
 
 		Iterator<String> i = alumnos.iterator();
-		System.out.println("--- Lista original ---");
-		while (i.hasNext()) {
-			String valor = i.next();
-			System.out.println(valor);
-		}
-
-		i = alumnos.iterator();
 		while (i.hasNext()) {
 			String valor = i.next();
 			if (valor.length() < 4) {
@@ -30,40 +22,39 @@ public class EjercicioListIterator {
 			}
 		}
 
-		System.out.println("-------------");
-		System.out.println(alumnos);
+		System.out.println("--- Lista tras eliminar nombres cortos ---");
+		System.out.println(alumnos); // Quedan: Luis, Marta, Juan, Pedro
 
-		// FIN EJERCICIO ITERATOR
-
-		// EJERCICIO LISTITERATOR
+		// --- PARTE 2: LISTITERATOR ---
 		/*
-		 * 1. Crea un ListIterator para recorrer la lista resultante. 2. Recorre la
-		 * lista hacia delante: a. Si el nombre empieza con “P”, cámbialo a mayúsculas
-		 * b. Si el nombre empieza con “M”, añade al iterador un nuevo nombre "Marcos"
-		 * justo después 3. Imprime la lista después de estas modificaciones. 4. Recorre
-		 * la lista hacia atrás e imprime todos los nombres.
+		 * Requisitos: 1. Recorrer hacia delante imprimiendo el índice (nextIndex). 2.
+		 * Si empieza por P -> Mayúsculas (set). 3. Si empieza por M -> Añadir Marcos
+		 * detrás (add).
 		 */
 
-		System.out.println("-------------");
+		System.out.println("\n--- Recorrido hacia DELANTE (Modificando) ---");
 		ListIterator<String> lI = alumnos.listIterator();
-		while (lI.hasNext()) {
-			String valor = lI.next();
-			System.out.println(valor);
-		}
-		while (lI.hasNext()) {
-			String valor = lI.next();
-			System.out.println(valor);
-			if (valor.charAt(0) == 'p' || valor.charAt(0) == 'P') {
-				lI.set(valor.toUpperCase());
-			}
-			if (valor.charAt(0) == 'm' || valor.charAt(0) == 'M') {
-				lI.set("Marcos");
-			}
 
+		while (lI.hasNext()) {
+			System.out.print("Índice " + lI.nextIndex() + ": ");
+
+			String valor = lI.next();
+			System.out.println(valor);
+
+			if (valor.toUpperCase().startsWith("P")) {
+				lI.set(valor.toUpperCase()); 
+			}
+			if (valor.toUpperCase().startsWith("M")) {
+				lI.add("Marcos"); 
+			}
 		}
-		System.out.println("-------------");
-		alumnos.listIterator();
+
+		System.out.println("\n--- Estado actual de la lista ---");
+		System.out.println(alumnos);
+		System.out.println("\n--- Recorrido hacia ATRÁS ---");
 		while (lI.hasPrevious()) {
+			System.out.print("Índice " + lI.previousIndex() + ": ");
+
 			String valor = lI.previous();
 			System.out.println(valor);
 		}

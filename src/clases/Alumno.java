@@ -2,7 +2,7 @@ package clases;
 
 import java.time.LocalDate;
 
-public class Alumno {
+public class Alumno implements Comparable<Alumno> {
 
 	private String nif;
 	private String nombre;
@@ -61,6 +61,11 @@ public class Alumno {
 
 	public void setRepetidor(boolean repetidor) {
 		this.repetidor = repetidor;
+	}
+
+	@Override
+	public int compareTo(Alumno o) {
+		return this.nombre.compareToIgnoreCase(o.nombre);
 	}
 
 	@Override

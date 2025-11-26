@@ -3,6 +3,8 @@ package main;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 
 import clases.Alumno;
 import clases.Ciclo;
@@ -87,7 +89,11 @@ public class Principal {
 				do {
 					try {
 						c = Ciclo.valueOf(Util.introducirCadena("Ciclo: ").toUpperCase());
-						ok = true;
+						if (c == Ciclo.DAM || c == Ciclo.DAW) {
+							ok = true;
+						} else {
+							ok = false;
+						}
 					} catch (IllegalArgumentException e) {
 						System.out.println("Valor incorrecto, el ciclo debe de ser DAM o DAW");
 					}
@@ -106,10 +112,10 @@ public class Principal {
 	}
 
 	private static void mostrar(ArrayList<Alumno> alumnos) {
+		Collections.sort(alumnos);
 		for (Alumno al : alumnos) {
 			System.out.println(al);
 		}
-
 	}
 
 	private static void mostrarAlumno(ArrayList<Alumno> alumnos) {
@@ -168,22 +174,37 @@ public class Principal {
 	}
 
 	private static void bajaAlumno(ArrayList<Alumno> alumnos) {
-		String nif = Util.introducirCadena("DNI a borrar");
-		Alumno encontrado = null;
-		for (Alumno al : alumnos) {
-			if (al.getNif().equalsIgnoreCase(nif)) {
-				encontrado = al;
-				break;
+		String nif = Util.introducirCadena("nif a borrar");
+		boolean encontrado = false;
+//		Alumno encontrado = null;
+//		for (Alumno al : alumnos) {
+//			if (al.getNif().equalsIgnoreCase(nif)) {
+//				encontrado = al;
+//				break;
+//			}
+//		}
+//		if (encontrado != null) {
+//			System.out.println("Vas a borrar a: " + encontrado.getNombre());
+//			if (Util.leerInt("Confirma: 1-Si, 0-No") == 1) {
+//				alumnos.removeIf(a -> a.getNif().equalsIgnoreCase(nif));
+//				System.out.println("Eliminado.");
+//			}
+//		} else {
+//			System.out.println("No encontrado.");
+//		}
+//		
+		Iterator<Alumno> it = alumnos.iterator();
+		while (it.hasNext()) {
+			Alumno a = it.next();
+			if (a.getNif().equalsIgnoreCase(nif)) {
+				it.remove();
+				encontrado = true;
 			}
 		}
-		if (encontrado != null) {
-			System.out.println("Vas a borrar a: " + encontrado.getNombre());
-			if (Util.leerInt("Confirma: 1-Si, 0-No") == 1) {
-				alumnos.removeIf(a -> a.getNif().equalsIgnoreCase(nif));
-				System.out.println("Eliminado.");
-			}
+		if (encontrado == false) {
+			System.out.println("Alumno no encontrado. ");
 		} else {
-			System.out.println("No encontrado.");
+			System.out.println("Alumno eliminado correctamente. ");
 		}
 	}
 

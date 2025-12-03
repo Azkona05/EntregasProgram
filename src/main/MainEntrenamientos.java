@@ -19,11 +19,11 @@ public class MainEntrenamientos {
 		Entrenamiento ent;
 		Persona p;
 
-		ent = new Entrenamiento("WOD-100", LocalDate.now(), "Sentadillas", 100);
+		ent = new Entrenamiento(LocalDate.now(), "Sentadillas", 100);
 		entrenamientos.put(ent.getCodigo(), ent);
-		ent = new Entrenamiento("WOD-101", LocalDate.now(), "Flexiones", 200);
+		ent = new Entrenamiento(LocalDate.now(), "Flexiones", 200);
 		entrenamientos.put(ent.getCodigo(), ent);
-		ent = new Entrenamiento("WOD-102", LocalDate.now(), "Abdominales", 500);
+		ent = new Entrenamiento(LocalDate.now(), "Abdominales", 500);
 		entrenamientos.put(ent.getCodigo(), ent);
 		p = new Cliente("160654812A", "Pedro", LocalDate.now(), (HashMap<String, Entrenamiento>) entrenamientos);
 		personas.add(p);
